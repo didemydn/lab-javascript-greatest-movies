@@ -2035,18 +2035,45 @@ console.log(scoresAverage(movies));
 function dramaMoviesScore(moviesArray) {
     const DramaMovies = moviesArray.filter(Dramas => Dramas.genre.indexOf("Drama") !== -1);
     const DramaScores = DramaMovies.reduce((acc,scr) => acc + scr.score,0);
-    return DramaScores/DramaMovies.length;
+    return (DramaScores/DramaMovies.length).toFixed(2);
 }
 console.log(dramaMoviesScore(movies));
 
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
-function orderByYear(moviesArray) {}
+function orderByYear(moviesArray) {
+    const sortedbyyear = moviesArray.sort((a,b) => a.year-b.year);
+    return sortedbyyear;
+}
+console.log(orderByYear(movies));
 
 // Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
-function orderAlphabetically(moviesArray) {}
+function orderAlphabetically(moviesArray) {
+    let n = 20;
+    const titleList= [];
+    for (let i = 0; i < n; i++){
+        titleList.push(moviesArray[i].title);
+    }
+    return titleList;
+    }
+console.log(orderAlphabetically(movies));
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
-function turnHoursToMinutes(moviesArray) {}
+function turnHoursToMinutes(moviesArray) {
+    let newArr=[];
+    let duration=0;
+    let durationString = [];
+    for(let i=0; i < moviesArray.length; i++){
+        durationString = moviesArray[i].duration.split(" ");
+        duration=parseInt(durationString[0].replace("h", "") * 60);
+        if(durationString[1] !== undefined)
+            duration += parseInt(durationString[1].replace("min",""));
+        moviesArray[i].duration=duration;
+        newArr.push(moviesArray[i]);       
+    }
+    
+    return newArr;
+}
+console.log(turnHoursToMinutes(movies));
 
 // BONUS - Iteration 8: Best yearly score average - Best yearly score average
 function bestYearAvg(moviesArray) {}
